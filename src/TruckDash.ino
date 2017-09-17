@@ -10,13 +10,13 @@
 // Connect SCLK to UNO Digital #13 (Hardware SPI clock)
 // Connect MISO to UNO Digital #12 (Hardware SPI MISO)
 // Connect MOSI to UNO Digital #11 (Hardware SPI MOSI)
-#define RA8875_INT 3
+#define RA8875_INT 8
 #define RA8875_CS 10
 #define RA8875_RESET 9
 //#define ONE_WIRE_BUS 7 // Data wire is plugged into pin 2 on the Arduino
 
 Adafruit_RA8875 tft = Adafruit_RA8875(RA8875_CS, RA8875_RESET);  //define display
-OneWire oneWire(ONE_WIRE_BUS); // Setup a oneWire instance
+//OneWire oneWire(ONE_WIRE_BUS); // Setup a oneWire instance
 //DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature.
 
 //thermocouple
@@ -31,7 +31,7 @@ MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 /////////thermocouple
 
 int coolPin = 2;
-float CoolantTemp = 0;
+int CoolantTemp = 0;
 int coolantPos = 10;
 //int coolantIndex = 0; //index on 1 wire bus
 
@@ -65,7 +65,7 @@ void setup()
   }
 
 /*initialize sensors and display*/
-  sensors.begin(); // Start one wire sensors
+  //sensors.begin(); // Start one wire sensors
   tft.displayOn(true);  //turn on display
   tft.GPIOX(true);      // Enable TFT - display enable tied to GPIOX
   tft.PWM1config(true, RA8875_PWM_CLK_DIV1024); // PWM output for backlight
@@ -73,8 +73,8 @@ void setup()
   tft.fillScreen(RA8875_BLACK);
   tft.textMode();// Switch to text mode
 
-  pinMode(vccPin, OUTPUT); digitalWrite(vccPin, HIGH); //thermo
-  pinMode(gndPin, OUTPUT); digitalWrite(gndPin, LOW); //thermo
+  //pinMode(vccPin, OUTPUT); digitalWrite(vccPin, HIGH); //thermo
+  //pinMode(gndPin, OUTPUT); digitalWrite(gndPin, LOW); //thermo
 
 /* setup static headings for sensor outputs*/
   tft.textSetCursor(indentColOne, coolantPos);
