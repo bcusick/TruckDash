@@ -6,6 +6,8 @@
 #include <max6675.h>
 
 //test
+//test2
+
 
 // Library only supports hardware SPI at this time
 // Connect SCLK to UNO Digital #13 (Hardware SPI clock)
