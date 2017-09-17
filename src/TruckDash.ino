@@ -1,8 +1,8 @@
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_RA8875.h>
-#include <OneWire.h>
-#include <DallasTemperature.h>
+//#include <OneWire.h>
+//#include <DallasTemperature.h>
 #include <max6675.h>
 
 
@@ -13,11 +13,11 @@
 #define RA8875_INT 3
 #define RA8875_CS 10
 #define RA8875_RESET 9
-#define ONE_WIRE_BUS 7 // Data wire is plugged into pin 2 on the Arduino
+//#define ONE_WIRE_BUS 7 // Data wire is plugged into pin 2 on the Arduino
 
 Adafruit_RA8875 tft = Adafruit_RA8875(RA8875_CS, RA8875_RESET);  //define display
 OneWire oneWire(ONE_WIRE_BUS); // Setup a oneWire instance
-DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature.
+//DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature.
 
 //thermocouple
 int thermoDO = 4;
@@ -32,8 +32,10 @@ int gndPin = 2;
 
 float CoolantTemp = 0;
 int coolantPos = 10;
-int coolantIndex = 0; //index on 1 wire bus
+//int coolantIndex = 0; //index on 1 wire bus
 
+
+/*
 float AmbientTemp = 0;
 int ambientPos = 20;
 int ambientIndex = 1; //index on 1 wire bus
@@ -41,6 +43,7 @@ int ambientIndex = 1; //index on 1 wire bus
 float intakeTemp = 0;
 int iatPos = 30;
 int iatIndex = 2; //index on 1 wire bus
+*/
 
 float egtTemp = 0;
 int egtPos = 40;
@@ -76,7 +79,7 @@ void setup()
   tft.textSetCursor(indentColOne, coolantPos);
   tft.textTransparent(RA8875_WHITE);
   tft.textWrite(" : COOLANT");
-
+/*
   tft.textSetCursor(indentColOne, ambientPos);
   tft.textTransparent(RA8875_WHITE);
   tft.textWrite(" : OUTSIDE");
@@ -84,6 +87,7 @@ void setup()
   tft.textSetCursor(indentColOne, iatPos);
   tft.textTransparent(RA8875_WHITE);
   tft.textWrite(" : IAT");
+*/
 
   tft.textSetCursor(indentColOne, egtPos);
   tft.textTransparent(RA8875_WHITE);
@@ -107,16 +111,21 @@ void loop(void)
 
   if (currentMillis - prevMillis >= updateInterval){
     prevMillis = currentMillis;
+
+/*onewire stuff- implement later
     sensors.requestTemperatures(); // Send the command to get temperatures
 
     CoolantTemp = sensors.getTempCByIndex(coolantIndex);
     AmbientTemp = sensors.getTempCByIndex(ambientIndex);
     intakeTemp  = sensors.getTempCByIndex(iatIndex);
+
+    */
+    CoolantTemp =
     egtTemp     = thermocouple.readCelsius();
 
     displayValues(CoolantTemp, coolantPos);
-    displayValues(AmbientTemp, ambientPos);
-    displayValues(intakeTemp, iatPos);
+    //displayValues(AmbientTemp, ambientPos);
+    //displayValues(intakeTemp, iatPos);
     displayValues(egtTemp, egtPos);
   }
 }
