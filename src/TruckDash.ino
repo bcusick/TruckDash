@@ -25,11 +25,12 @@ int thermoCS = 5;
 int thermoCLK = 6;
 
 MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
-int vccPin = 3;
-int gndPin = 2;
+
+//int vccPin = 3;
+//int gndPin = 2;
 /////////thermocouple
 
-
+int coolPin = 2;
 float CoolantTemp = 0;
 int coolantPos = 10;
 //int coolantIndex = 0; //index on 1 wire bus
@@ -120,7 +121,8 @@ void loop(void)
     intakeTemp  = sensors.getTempCByIndex(iatIndex);
 
     */
-    CoolantTemp =
+    CoolantTemp = analogRead(coolPin);
+    CoolantTemp = map(CoolantTemp, 0, 1023, -40, 120); //need to verify from Toyota manual
     egtTemp     = thermocouple.readCelsius();
 
     displayValues(CoolantTemp, coolantPos);
