@@ -1,8 +1,9 @@
+/*
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_RA8875.h>
-//#include <OneWire.h>
-//#include <DallasTemperature.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 #include <max6675.h>
 
 
@@ -29,10 +30,10 @@ MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 //int vccPin = 3;
 //int gndPin = 2;
 /////////thermocouple
-
+*/
 int coolPin = 2;
 int CoolantTemp = 0;
-int coolantPos = 10;
+//int coolantPos = 10;
 //int coolantIndex = 0; //index on 1 wire bus
 
 
@@ -45,11 +46,13 @@ float intakeTemp = 0;
 int iatPos = 30;
 int iatIndex = 2; //index on 1 wire bus
 */
-
+/*
 float egtTemp = 0;
 int egtPos = 40;
 
 int indentColOne = 30;
+*/
+
 long prevMillis = 0;
 int updateInterval = 500;
 
