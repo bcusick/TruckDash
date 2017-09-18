@@ -33,6 +33,7 @@ MAX6675 thermocouple(thermoCLK, thermoCS, thermoDO);
 */
 int coolPin = 2;
 int CoolantTemp = 0;
+int coolantR = 10000;
 //int coolantPos = 10;
 //int coolantIndex = 0; //index on 1 wire bus
 
@@ -124,8 +125,11 @@ void loop(void)
     intakeTemp  = sensors.getTempCByIndex(iatIndex);
 
     */
-    CoolantTemp = analogRead(coolPin);
-    CoolantTemp = map(CoolantTemp, 0, 1023, -40, 120); //need to verify from Toyota manual
+    CoolantTemp = analogRead(coolPin);  //analog voltage read
+    CoolantTemp = coolantR / (1023/CoolantTemp - 1);  //convert to resistance based on harware voltage divider
+    CoolantTemp = 2055.9 * pow(CoolantTemp, -0.57);  // derived formula based on graph in Toyota manual
+    
+
     egtTemp     = thermocouple.readCelsius();
 
     displayValues(CoolantTemp, coolantPos);
